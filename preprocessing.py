@@ -1,6 +1,17 @@
 import pandas as pd
 pd.options.mode.chained_assignment = None
 
+weekday_map = {
+        # according to documentation: https://docs.python.org/3/library/datetime.html#datetime.datetime.weekday
+        0: 'Segunda-feira',
+        1: 'Terça-feira',
+        2: 'Quarta-feira', 
+        3: 'Quinta-feira', 
+        4: 'Sexta-feira', 
+        5: 'Sábado', 
+        6: 'Domingo'
+    }
+
 def load_data(url: str, dt_cols: list) -> pd.DataFrame:
     '''Importa o dataset do endereço especificado e converte as colunas para o tipo datetime.
        Args: 

@@ -6,17 +6,6 @@ import plotly.express as px
 pd.options.mode.chained_assignment = None
 sns.set_style('white')
 
-weekday_map = {
-        # according to documentation: https://docs.python.org/3/library/datetime.html#datetime.datetime.weekday
-        0: 'Segunda-feira',
-        1: 'Terça-feira',
-        2: 'Quarta-feira', 
-        3: 'Quinta-feira', 
-        4: 'Sexta-feira', 
-        5: 'Sábado', 
-        6: 'Domingo'
-    }
-
 
 def plot_performed_vs_unperformed(performed: int, unperformed: int) -> None:
     ''' Plota dois gráficos lado a lado para comprar viagens realizadas e não realizadas.
