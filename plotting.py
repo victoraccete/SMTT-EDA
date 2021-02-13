@@ -261,11 +261,35 @@ def plot_delay_info_weekday(df: pd.DataFrame, kind="line"):
             None. Apenas plota o gráfico.
     '''  
     if kind == "line":
-        fig = px.line(data_frame=delay_by_hour, x='Hora da viagem', y='Atraso médio', 
+        fig = px.line(data_frame=df, x='Dia da semana', y='Atraso médio', 
+                    text='Atraso médio', title='Atraso médio por dia da semana', 
+                    template='plotly_white',
+                    )
+        fig.update_traces(textposition='top center')
+    elif kind == "bar":
+        fig = px.bar(data_frame=df, x='Dia da semana', y='Atraso médio', 
+                    text='Atraso médio', title='Atraso médio por dia da semana', 
+                    template='plotly_white',
+                    )
+    else:
+        raise AssertionError("Parâmetro 'kind' só admite 'line' ou 'bar'")
+
+    fig.show()
+    return None
+
+def plot_delay_info_hour(df: pd.DataFrame, kind="line"):
+    ''' Plota um gráfico interativo com o atraso médio por hora do dia.
+        Args:
+            df: DataFrame do Pandas com informações a serem visualizadas. 
+        Return:
+            None. Apenas plota o gráfico.
+    '''  
+    if kind == "line":
+        fig = px.line(data_frame=df, x='Hora da viagem', y='Atraso médio', 
                   text='Atraso médio', title='Atraso médio das viagens por hora', template='plotly_white')
         fig.update_traces(textposition='top center')
     elif kind == "bar":
-        fig = px.bar(data_frame=delay_by_hour, x='Hora da viagem', y='Atraso médio', 
+        fig = px.bar(data_frame=df, x='Hora da viagem', y='Atraso médio', 
                   text='Atraso médio', title='Atraso médio das viagens por hora', template='plotly_white')
         fig.update_traces(textposition='outside')
     else:
