@@ -1,17 +1,6 @@
 import pandas as pd
 pd.options.mode.chained_assignment = None
 
-weekday_map = {
-        # according to documentation: https://docs.python.org/3/library/datetime.html#datetime.datetime.weekday
-        0: 'Segunda-feira',
-        1: 'Terça-feira',
-        2: 'Quarta-feira', 
-        3: 'Quinta-feira', 
-        4: 'Sexta-feira', 
-        5: 'Sábado', 
-        6: 'Domingo'
-    }
-
 def load_data(url: str, dt_cols: list) -> pd.DataFrame:
     '''Importa o dataset do endereço especificado e converte as colunas para o tipo datetime.
        Args: 
@@ -35,6 +24,17 @@ def get_unperformed_frequency(df: pd.DataFrame, by="hour") -> pd.DataFrame:
         Return:
             Pandas DataFrame com informação de frequência de acordo com a separação indicada. 
     '''
+    weekday_map = {
+        # according to documentation: https://docs.python.org/3/library/datetime.html#datetime.datetime.weekday
+        0: 'Segunda-feira',
+        1: 'Terça-feira',
+        2: 'Quarta-feira', 
+        3: 'Quinta-feira', 
+        4: 'Sexta-feira', 
+        5: 'Sábado', 
+        6: 'Domingo'
+    }
+
     if by == "hour":
         frequency_df = df.groupby(df['hora_prevista'].dt.hour).count()
         frequency_df = frequency_df.iloc[:, :1].reset_index()
@@ -135,6 +135,17 @@ def get_delay_avg_info(df: pd.DataFrame, by="hour") -> pd.DataFrame:
             df: DataFrame com informações a serem visualizadas.
             by: pode ser "hour" (por hora do dia) ou "weekday" (por dia da semana)
     '''
+    weekday_map = {
+        # according to documentation: https://docs.python.org/3/library/datetime.html#datetime.datetime.weekday
+        0: 'Segunda-feira',
+        1: 'Terça-feira',
+        2: 'Quarta-feira', 
+        3: 'Quinta-feira', 
+        4: 'Sexta-feira', 
+        5: 'Sábado', 
+        6: 'Domingo'
+    }
+    
     if by == "hour":
         delay_info = df.groupby(df['hora_realizada'].dt.hour).mean().reset_index()
         delay_info = delay_info.loc[:, ['hora_realizada', 'tempo_de_atraso']]
