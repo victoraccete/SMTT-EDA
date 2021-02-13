@@ -120,7 +120,7 @@ def get_delay_info(df: pd.DataFrame):
         Return:
             DataFrame com informações de atraso por empresa e por situação de atraso.
     '''
-    df = performed_travels.groupby(['apelido_empresa', 'status_de_atraso']).count().reset_index()
+    df = df.groupby(['apelido_empresa', 'status_de_atraso']).count().reset_index()
     df = df.iloc[:, :3]
     df.columns = ['Empresa', 'Status', 'Frequência']
     for index, company in enumerate(['Cidade de Maceió', 'Real Alagoas', 'São Francisco', 'Veleiro']):
