@@ -29,7 +29,7 @@ def get_unperformed_frequency(df: pd.DataFrame, by="hour") -> pd.DataFrame:
         frequency_df = frequency_df.iloc[:, :1].reset_index()
         frequency_df.columns = ['Hora prevista', 'Viagens não realizadas']
     elif by == "weekday":
-        df['dia_da_semana'] = unperformed_travels['hora_prevista'].dt.weekday
+        df['dia_da_semana'] = df['hora_prevista'].dt.weekday
         frequency_df = df.groupby(df['dia_da_semana']).count()
         frequency_df = frequency_df.iloc[:, :1].reset_index().replace(weekday_map)
         frequency_df.columns = ['Dia da semana', 'Viagens não realizadas']
